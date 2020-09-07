@@ -1,3 +1,17 @@
-<div class="page" fxLayoutAlign="center center">
-  <button mat-flat-button color="accent" (click)="submit()">Submit</button>
+<div class="page" fxLayout="column">
+  <mat-toolbar fxLayoutAlign="center center">
+    <span>EOS WebAuthn Sample</span>
+  </mat-toolbar>
+  <mat-tab-group mat-stretch-tabs headerPosition="below" fxFlex="grow">
+    <mat-tab label="Register">
+      <div class="tab" fxLayoutAlign="center center">
+        <button mat-flat-button color="accent">Create new credential</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Test">
+      <div class="tab" fxLayoutAlign="center center">
+        <button mat-flat-button color="accent">Transfer</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
