@@ -14,8 +14,26 @@
       </div>
     </mat-tab>
     <mat-tab label="Test 2">
-      <div class="tab" fxLayoutAlign="center center">
-        <button mat-flat-button color="accent">Transfer</button>
+      <div class="tab" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="48px">
+        <a href="https://jungle3.bloks.io/account/motokichieos" target="_blank">
+          <span class="actor">motokichieos</span>
+        </a>
+        <span class="balance">{{ balance }}</span>
+        <form [formGroup]="transferForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" (ngSubmit)="transfer()">
+          <mat-form-field>
+            <mat-label>To</mat-label>
+            <input matInput formControlName="to">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput formControlName="quantity">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Memo</mat-label>
+            <input matInput formControlName="memo">
+          </mat-form-field>
+          <button mat-flat-button type="submit" color="accent">Transfer</button>
+        </form>
       </div>
     </mat-tab>
   </mat-tab-group>
