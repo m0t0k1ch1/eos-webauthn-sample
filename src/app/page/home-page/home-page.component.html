@@ -3,12 +3,17 @@
     <span>EOS WebAuthn Sample</span>
   </mat-toolbar>
   <mat-tab-group mat-stretch-tabs headerPosition="below" fxFlex="grow">
-    <mat-tab label="Register">
-      <div class="tab" fxLayoutAlign="center center">
-        <button mat-flat-button color="accent">Create new credential</button>
+    <mat-tab label="Test 1">
+      <div class="tab" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <mat-form-field class="attestation" appearance="outline">
+          <mat-label>Attestation</mat-label>
+          <textarea matInput rows=20 readonly=true>{{ attestation }}</textarea>
+        </mat-form-field>
+        <button mat-flat-button color="accent" (click)="createCredential()">Create new credential</button>
+        <button mat-stroked-button (click)="copyAttestationToClipboard()" disabled="{{ attestation.length === 0 }}">Copy to clipboard</button>
       </div>
     </mat-tab>
-    <mat-tab label="Test">
+    <mat-tab label="Test 2">
       <div class="tab" fxLayoutAlign="center center">
         <button mat-flat-button color="accent">Transfer</button>
       </div>
