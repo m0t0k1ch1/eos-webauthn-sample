@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Api, JsonRpc, RpcError } from 'eosjs';
 import { WebAuthnSignatureProvider } from 'eosjs/dist/eosjs-webauthn-sig';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
