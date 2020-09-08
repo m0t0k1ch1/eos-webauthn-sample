@@ -20,12 +20,12 @@ import { WebauthnService } from 'src/app/service/webauthn.service';
 export class HomePageComponent implements OnInit
 {
   attestation = '';
-  balance = '';
+  balance     = '';
 
   transferForm = this.fb.group({
-    to: ['sandboxspace'],
+    to:       ['sandboxspace'],
     quantity: ['1.0000 EOS'],
-    memo: ['WebAuthn!'],
+    memo:     ['WebAuthn!'],
   });
 
   constructor(
