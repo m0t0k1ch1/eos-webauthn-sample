@@ -19,13 +19,18 @@ import { WebauthnService } from 'src/app/service/webauthn.service';
 })
 export class HomePageComponent implements OnInit
 {
-  attestation = '';
   balance     = '';
+  attestation = '';
+  signature   = '';
 
   transferForm = this.fb.group({
     to:       ['sandboxspace'],
     quantity: ['1.0000 EOS'],
     memo:     ['WebAuthn!'],
+  });
+
+  signForm = this.fb.group({
+    challenge: ['poyoyo'],
   });
 
   constructor(
@@ -49,23 +54,6 @@ export class HomePageComponent implements OnInit
     );
   }
 
-  createCredential(): void
-  {
-    this.webauthnService.createCredential().subscribe(
-      attestation => {
-        this.attestation = attestation;
-        this.notificationService.progress('credential created');
-      },
-      err => this.notificationService.error(err.message),
-    )
-  }
-
-  copyAttestationToClipboard(): void
-  {
-    this.clipboard.copy(this.attestation);
-    this.notificationService.progress('copied');
-  }
-
   transfer(): void
   {
     const value = this.transferForm.value;
@@ -77,5 +65,55 @@ export class HomePageComponent implements OnInit
       },
       err => this.notificationService.error(err.message),
     );
+  }
+
+  createAttestation(): void
+  {
+    this.webauthnService.createCredential().subscribe(
+      credential => {
+        this.eosService.extractAttestationFromCredential(credential).subscribe(
+          attestation => {
+            this.attestation = attestation;
+            this.notificationService.progress('attestation created');
+          },
+          err => this.notificationService.error(err.message),
+        );
+      },
+      err => this.notificationService.error(err.message),
+    );
+  }
+
+  copyAttestationToClipboard(): void
+  {
+    this.clipboard.copy(this.attestation);
+    this.notificationService.progress('copied');
+  }
+
+  sign(): void
+  {
+    const value = this.signForm.value;
+    this.eosService.createChallengeHash(value.challenge).subscribe(
+      challengeHash => {
+        this.webauthnService.createAssertion(challengeHash).subscribe(
+          assertion => {
+            this.eosService.extractSignatureFromAssertion(assertion).subscribe(
+              signature => {
+                this.signature = signature;
+                this.notificationService.progress('signature created');
+              },
+              err => this.notificationService.error(err.message),
+            );
+          },
+          err => this.notificationService.error(err.message),
+        );
+      },
+      err => this.notificationService.error(err.message),
+    );
+  }
+
+  copySignatureToClipboard(): void
+  {
+    this.clipboard.copy(this.signature);
+    this.notificationService.progress('copied');
   }
 }

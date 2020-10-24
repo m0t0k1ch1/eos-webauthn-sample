@@ -1,4 +1,7 @@
 export const environment = {
   production: true,
+  actor: 'motokichieos',
+  credentialID: '0141A647E7133ADFF1626EF63A438C9D0A9EEC54C3D5521924B4A1CE9D5F3646CED0E5DF393B5AD23A566C4EDC36D832F5846153CB302312AAF476881E1D162196',
+  pubkey: 'PUB_WA_3U8NmdbM2NcwasN3kECsHb65AZZxXDAKnJEjw2hUjaSPd1754d6bLQvqNL68WLas9SRtmyFzFf53yUVs9qE4yzDuZFAv2mSPsb',
   rpid: 'eos-webauthn-sample-42142.web.app',
 };

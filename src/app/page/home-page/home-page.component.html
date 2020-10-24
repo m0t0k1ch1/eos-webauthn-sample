@@ -4,16 +4,6 @@
   </mat-toolbar>
   <mat-tab-group mat-stretch-tabs headerPosition="below" fxFlex="grow">
     <mat-tab label="Test 1">
-      <div class="tab" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-        <mat-form-field class="attestation" appearance="outline">
-          <mat-label>Attestation</mat-label>
-          <textarea matInput rows=20 readonly=true>{{ attestation }}</textarea>
-        </mat-form-field>
-        <button mat-flat-button color="accent" (click)="createCredential()">Create new credential</button>
-        <button mat-stroked-button (click)="copyAttestationToClipboard()" disabled="{{ attestation.length === 0 }}">Copy to clipboard</button>
-      </div>
-    </mat-tab>
-    <mat-tab label="Test 2">
       <div class="tab" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="48px">
         <a href="https://jungle3.bloks.io/account/motokichieos" target="_blank">
           <span class="actor">motokichieos</span>
@@ -33,6 +23,32 @@
             <input matInput formControlName="memo">
           </mat-form-field>
           <button mat-flat-button type="submit" color="accent">Transfer</button>
+        </form>
+      </div>
+    </mat-tab>
+    <mat-tab label="Test 2">
+      <div class="tab" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <mat-form-field class="attestation" appearance="outline">
+          <mat-label>Attestation</mat-label>
+          <textarea matInput rows=20 readonly=true>{{ attestation }}</textarea>
+        </mat-form-field>
+        <button mat-flat-button color="accent" (click)="createAttestation()">Create new attestation</button>
+        <button mat-stroked-button (click)="copyAttestationToClipboard()" disabled="{{ attestation.length === 0 }}">Copy to clipboard</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Test 3">
+      <div class="tab" fxLayout="column" fxLayoutAlign="center center">
+        <form [formGroup]="signForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" (ngSubmit)="sign()">
+          <mat-form-field>
+            <mat-label>Challenge (preimage)</mat-label>
+            <input matInput formControlName="challenge">
+          </mat-form-field>
+          <mat-form-field class="attestation" appearance="outline">
+            <mat-label>Signature</mat-label>
+            <textarea matInput rows=20 readonly=true>{{ signature }}</textarea>
+          </mat-form-field>
+          <button mat-flat-button type="submit" color="accent">Sign</button>
+          <button mat-stroked-button type="button" (click)="copySignatureToClipboard()" disabled="{{ signature.length === 0 }}">Copy to clipboard</button>
         </form>
       </div>
     </mat-tab>
